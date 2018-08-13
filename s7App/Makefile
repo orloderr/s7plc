@@ -15,7 +15,7 @@ include $(TOP)/configure/CONFIG
 HOST_OPT = NO
 
 # Want local functions non-static? Define DEBUG 
-#CFLAGS += -DDEBUG
+#CFLAGS += -DDEBUG 
 
 # library
 
@@ -35,13 +35,13 @@ s7plcApp_SRCS += appMain.cc
 s7plcApp_LIBS += s7plc
 s7plcApp_LIBS += $(EPICS_BASE_IOC_LIBS)
 s7plcApp_DBD += base.dbd
-s7plcApp_DBD += s7plcBase.dbd
-s7plcApp_DBD += s7plcCalcout.dbd
-s7plcApp_DBD += s7plcReg.dbd
+s7plcApp_DBD += $(TOP)/s7App/s7plcBase.dbd
+s7plcApp_DBD += $(TOP)/s7App/s7plcCalcout.dbd
+s7plcApp_DBD += $(TOP)/s7App/s7plcReg.dbd
 DBD += s7plcApp.dbd
 
 include $(TOP)/configure/RULES
 
-s7plc.dbd: s7plcBase.dbd s7plcCalcout.dbd s7plcReg.dbd
+s7plc.dbd: $(TOP)/s7App/s7plcBase.dbd $(TOP)/s7App/s7plcCalcout.dbd $(TOP)/s7App/s7plcReg.dbd
 	cat $^ > $@
 endif
